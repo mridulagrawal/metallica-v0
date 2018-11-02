@@ -1,8 +1,43 @@
 .navbar {
     .navbar-nav {
-        a   {
+        a {
             // padding-top: 0px;
             // padding-bottom: 0px;
+        }
+        &-profile {
+            border: 1px solid darkgrey;
+            border-radius: 50%;
+            &:hover {
+                box-shadow: 0 0 11px 2px black;
+            }
+            &--cursor {
+                cursor: pointer;
+            }
+        }
+    }
+    .navbar-nav.navbar-right {
+        margin-right: 10%;
+        span {
+            display: block;
+            padding: 15px;
+        }
+    }
+    .popover-title {
+        display: none;
+    }
+    .popover-content {
+        padding: 0;
+        .dropdown-menu {
+            position: relative;
+            float: none;
+            display: block;
+            margin: 0 !important;
+            min-width: 160px;
+            padding: 5px 0;
+            font-size: 14px;
+            text-align: left;
+            list-style: none;
+            border: none;
         }
     }
     border-radius: 0;

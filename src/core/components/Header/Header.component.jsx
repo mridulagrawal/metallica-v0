@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
+import { Popover, Overlay, Button } from 'react-bootstrap';
+
 import './Header.scss'
 
 class HeaderComponent extends Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.handleClick = e => {
+            this.setState({ target: e.target, show: !this.state.show });
+        };
+
+        this.state = {
+            show: false
+        };
+    }
+    popoverClick = () => {
+        return <Popover id="popover-trigger-click" title="Popover bottom">
+            <strong>Holy guacamole!</strong> Check this info.
+        </Popover>
+    };
+
     render() {
         return (
+            <>
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     {/* <!-- Brand and toggle get grouped for better mobile display --> */}
@@ -26,21 +46,36 @@ class HeaderComponent extends Component {
                         </ul>
 
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="/">Link</a></li>
-                            <li className="dropdown">
-                                <a href="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                                <ul className="dropdown-menu">
-                                    <li><a href="/">Action</a></li>
-                                    <li><a href="/">Another action</a></li>
-                                    <li><a href="/">Something else here</a></li>
-                                    <li role="separator" className="divider"></li>
-                                    <li><a href="/">Separated link</a></li>
-                                </ul>
+                            <li>
+                                <span>Hi Mridul</span>
+                            </li>
+                            <li className="navbar-nav-profile">
+                                <span className="navbar-nav-profile--cursor glyphicon glyphicon-user" onClick={this.handleClick}></span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+            <Overlay
+                show={this.state.show}
+                rootClose
+                onHide={() => this.setState({ show: false })}
+                target={this.state.target}
+                placement="bottom"
+                container={this}
+                containerPadding={20}
+            >
+                <Popover id="popover-contained" title="Popover-profile-bottom">
+                    <ul className="dropdown-menu">
+                        <li><a href="/">Action</a></li>
+                        <li><a href="/">Another action</a></li>
+                        <li><a href="/">Something else here</a></li>
+                        <li role="separator" className="divider"></li>
+                        <li><a href="/">Separated link</a></li>
+                    </ul>
+                </Popover>
+            </Overlay>
+            </>
         );
     }
 }
