@@ -1,0 +1,15 @@
+.panel {
+    .panel-heading {
+        &--tradeDetail {
+            font-weight: 700;
+        }
+        .btn.glyphicon {
+            padding: 0;
+            top: 0;
+            border: none;
+            &.glyphicon-pencil {
+                margin-right: 10px;
+            }
+        }
+    }
+}

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Header from './core/containers/Header/Header';
-import TradeGrid from './core/containers/TradeGrid/TradeGrid';
+import { connect } from 'react-redux';
+
+import Header from './containers/Header/Header';
+import TradeGrid from './containers/TradeGrid/TradeGrid';
 import './styles/App.scss'
+import TradePanel from './containers/TradePanel/TradePanel';
+
 class App extends Component {
   render() {
     return <>
@@ -12,12 +16,20 @@ class App extends Component {
             <TradeGrid />
           </div>
           <div className="col-md-4">
-            hi
-        </div>
+            <TradePanel />
+          </div>
         </div>
       </div>
+      {this.props.isFetching && <div className="loader"></div>}
     </>;
   }
 }
 
-export default App;
+export const mapStateToProps = (state) => {
+  const { isFetching } = state.appState;
+  return {
+    isFetching
+  }
+};
+
+export default connect(mapStateToProps)(App);

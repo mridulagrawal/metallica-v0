@@ -1,0 +1,18 @@
+.trade-form {
+    .form-group {
+        .radio {
+            padding: 0;
+        }
+        .control-label {
+            text-align: left;
+        }
+    }
+}
+
+input[type="radio"] {
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.5);
+    /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+}

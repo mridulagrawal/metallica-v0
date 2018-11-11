@@ -72,10 +72,10 @@ class HeaderComponent extends Component {
                             <div className="hidden-lg navbar-nav divider"></div>
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
-                                    <span>Hi Mridul</span>
+                                    <div>Hi Mridul</div>
                                 </li>
                                 <li className="navbar-nav-profile">
-                                    <span className="fas fa-user-circle" onClick={this.handleClick}></span>
+                                    <div className="fas fa-user-circle" onClick={this.handleClick}></div>
                                 </li>
                             </ul>
                         </div>

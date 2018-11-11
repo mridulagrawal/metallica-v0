@@ -5,7 +5,12 @@ class Grid extends React.Component {
 
   render() {
     return (
-      <GridComponent gridData={this.props.gridData} />
+      <GridComponent
+        gridData={this.props.gridData}
+        handleCellClick={this.props.handleCellClick}
+        handleSort={this.props.handleSort}
+        {...this.props}
+      />
     );
   }
 }

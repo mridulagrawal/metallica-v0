@@ -15,7 +15,7 @@
             &--cursor {
                 cursor: pointer;
             }
-            span {
+            div {
                 font-size: 50px;
                 padding: 0px !important;
             }
@@ -29,8 +29,7 @@
         @media screen and (min-width: 768px) {
             margin-right: 10%;
         }
-        span {
-            display: block;
+        div {
             padding: 15px;
             @media screen and (max-width: 768px) {
                 padding: 10px 15px 10px 15px;

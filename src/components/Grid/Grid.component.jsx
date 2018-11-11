@@ -6,19 +6,32 @@ class GridComponent extends React.Component {
     constructor(props) {
         super(props);
         this.getColumnData = this.getColumnData.bind(this);
+        this.getRowsData = this.getRowsData.bind(this);
     }
 
-    getColumnData = () => {
+    getColumnData() {
         return this.props.gridData.headers.map((col) => {
-            return <th key={`${col}-header`}>{col}<span className="fas fa-sort"></span> </th>
+            return <th key={`${col.heading}-header`}>
+                {col.heading}
+                {col.sort && <span className="fas fa-sort"
+                    onClick={() => this.props.handleSort(col.key)}>
+                </span>}
+            </th>
         });
     }
 
-    getRowsData = () => {
+    getRowsData() {
         return this.props.gridData.rowConfig.map((data) => {
-            return <tr key={data.id}>
+            return <tr key={data.id} onClick={() => this.props.handleCellClick(data.id)}>
                 {
                     Object.values(data.rowData).map((cell) => {
+                        if (cell.icon) {
+                            return <td key={`${data.id}-${cell.icon}`}>
+                                <button className="btn btn-primary" onClick={cell.click.bind(this)}>
+                                    <i className={cell.icon}></i>
+                                </button>
+                            </td>
+                        }
                         return <td key={`${data.id}-${cell}`}>{cell}</td>
                     })
                 }
