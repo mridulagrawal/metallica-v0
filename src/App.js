@@ -20,7 +20,9 @@ class App extends Component {
           </div>
         </div>
       </div>
-      {this.props.isFetching && <div className="loader"></div>}
+      {this.props.isFetching && <div className="loader-container">
+        <div className="loader"></div>
+      </div>}
     </>;
   }
 }

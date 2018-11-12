@@ -9,10 +9,14 @@ body {
     outline: none !important
 }
 
-.loader {
+.loader-container {
     position: absolute;
     top: 50%;
-    left: 50%; //TODO: ALIGN IT CENTRE
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid #3498db;
