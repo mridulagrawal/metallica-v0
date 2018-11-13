@@ -10,19 +10,19 @@ class GridComponent extends React.Component {
     }
 
     getColumnData() {
-        return this.props.gridData.headers.map((col) => {
-            return <th key={`${col.heading}-header`}>
+        return this.props.gridData.headers.map((col) =>
+            <th key={`${col.heading}-header`}>
                 {col.heading}
                 {col.sort && <span className="fas fa-sort"
                     onClick={() => this.props.handleSort(col.key)}>
                 </span>}
             </th>
-        });
+        );
     }
 
     getRowsData() {
-        return this.props.gridData.rowConfig.map((data) => {
-            return <tr key={data.id} onClick={() => this.props.handleCellClick(data.id)}>
+        return this.props.gridData.rowConfig.map((data) =>
+            <tr key={data.id} onClick={() => this.props.handleCellClick(data.id)}>
                 {
                     Object.values(data.rowData).map((cell) => {
                         if (cell.icon) {
@@ -35,8 +35,7 @@ class GridComponent extends React.Component {
                         return <td key={`${data.id}-${cell}`}>{cell}</td>
                     })
                 }
-            </tr>
-        });
+            </tr>);
     }
 
     render() {

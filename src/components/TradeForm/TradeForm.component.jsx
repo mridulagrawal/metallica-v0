@@ -8,8 +8,17 @@ class TradeFormComponent extends React.Component {
             price: 5530.05
         };
         this.getTradeDateField = this.getTradeDateField.bind(this);
-        this.onBlurPriceField = this.onBlurPriceField.bind(this);
+        this.onBlurMaskPriceField = this.onBlurMaskPriceField.bind(this);
+        this.onFocusUnMaskPriceField = this.onFocusUnMaskPriceField.bind(this);
+        this.handlePriceField = this.handlePriceField.bind(this);
         this.formatPrice = this.formatPrice.bind(this);
+    }
+
+    componentDidMount() {
+        const value = 5530.05;
+        const masked = `$ ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`
+
+        this.setState({ price: masked });
     }
 
     getTradeDateField() {
@@ -36,12 +45,27 @@ class TradeFormComponent extends React.Component {
         </div>
     }
 
-    onBlurPriceField() {
-        this.setState({ price: '$123' });
+    onBlurMaskPriceField(e) {
+        const value = +e.target.value;
+        const masked = `$ ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`
+        this.setState({ price: masked });
+    }
+
+    onFocusUnMaskPriceField(e) {
+        const value = e.target.value;
+        const unMasked = parseFloat(value.replace(/[$,]/gi, ''));
+        this.setState({ price: unMasked });
+    }
+
+    handlePriceField(e) {
+        const value = e.target.value;
+        if (!isNaN(value)) {
+            this.setState({ price: value });
+        }
     }
 
     formatPrice() {
-        return this.state.price + 1
+        return this.state.price
     }
 
     render() {
@@ -69,7 +93,10 @@ class TradeFormComponent extends React.Component {
                             <label className="control-label">Price</label>
                         </div>
                         <div className="col-md-5 col-xs-8">
-                            <input onBlur={this.onBlurPriceField}
+                            <input
+                                onBlur={this.onBlurMaskPriceField}
+                                onFocus={this.onFocusUnMaskPriceField}
+                                onChange={this.handlePriceField}
                                 type="text" className="form-control" id="price" placeholder="Price (USD)"
                                 value={this.formatPrice()} />
                         </div>
