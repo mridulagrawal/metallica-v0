@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Switch, Route } from 'react-router-dom';
 
 import Header from './containers/Header/Header';
-import TradeGrid from './containers/TradeGrid/TradeGrid';
 import './styles/App.scss'
-import TradePanel from './containers/TradePanel/TradePanel';
+import TradesApplicationComponent from './features/trades-application/TradesApplication.component';
+import TransportsApplicationComponent from './features/transports-application/TransportsApplication.component';
+import TransfersApplicationComponent from './features/transfers-application/TransfersApplication.component';
 
 class App extends Component {
   render() {
     return <>
       <Header />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8">
-            <TradeGrid />
-          </div>
-          <div className="col-md-4">
-            <TradePanel />
-          </div>
-        </div>
-      </div>
+      <Route exact path="/" component={() => <h2>Home</h2>} />
+      <Route path="/trades" component={TradesApplicationComponent} />
+      <Route path="/transfers" component={TransfersApplicationComponent} />
+      <Route path="/transports" component={TransportsApplicationComponent} />
       {this.props.isFetching && <div className="loader-container">
         <div className="loader"></div>
       </div>}
@@ -34,4 +30,4 @@ export const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

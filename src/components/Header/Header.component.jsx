@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Popover, Overlay } from 'react-bootstrap';
 import classNames from 'classnames';
-
+import { NavLink } from "react-router-dom";
 import './Header.scss'
 
 class HeaderComponent extends Component {
@@ -59,15 +59,27 @@ class HeaderComponent extends Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand" href="/">Brand</a>
+                            <NavLink to="/" activeClassName="navbar-brand">
+                                Metallica
+                            </NavLink>
                         </div>
 
                         {/* for desktop display */}
                         <div className={classNames('navbar-collapse', !this.state.toggleHamburger ? 'collapse' : '')} >
                             <ul className="nav navbar-nav">
-                                <li className="active"><a href="/route">Trades</a></li>
-                                <li><a href="/">Transfers</a></li>
-                                <li><a href="/">Transport</a></li>
+                                <li>
+                                    <NavLink exact to="/trades" activeClassName="navbar-nav__link-active">
+                                        Trades
+                                    </NavLink>
+                                </li>
+                                <li><NavLink to="/transfers" activeClassName="navbar-nav__link-active">
+                                    Transfers
+                                    </NavLink>
+                                </li>
+                                <li><NavLink to="/transports" activeClassName="navbar-nav__link-active">
+                                    Transports
+                                    </NavLink>
+                                </li>
                             </ul>
                             <div className="hidden-lg navbar-nav divider"></div>
                             <ul className="nav navbar-nav navbar-right">

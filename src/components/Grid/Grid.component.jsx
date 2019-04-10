@@ -1,42 +1,10 @@
 import React from 'react';
 
+import RowComponent from './Row.component';
+import ColumnComponent from './Column.component';
 import './Grid.scss'
 
 class GridComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.getColumnData = this.getColumnData.bind(this);
-        this.getRowsData = this.getRowsData.bind(this);
-    }
-
-    getColumnData() {
-        return this.props.gridData.headers.map((col) =>
-            <th key={`${col.heading}-header`}>
-                {col.heading}
-                {col.sort && <span className="fas fa-sort"
-                    onClick={() => this.props.handleSort(col.key)}>
-                </span>}
-            </th>
-        );
-    }
-
-    getRowsData() {
-        return this.props.gridData.rowConfig.map((data) =>
-            <tr key={data.id} onClick={() => this.props.handleCellClick(data.id)}>
-                {
-                    Object.values(data.rowData).map((cell) => {
-                        if (cell.icon) {
-                            return <td key={`${data.id}-${cell.icon}`}>
-                                <button className="btn btn-primary" onClick={cell.click.bind(this)}>
-                                    <i className={cell.icon}></i>
-                                </button>
-                            </td>
-                        }
-                        return <td key={`${data.id}-${cell}`}>{cell}</td>
-                    })
-                }
-            </tr>);
-    }
 
     render() {
 
@@ -45,11 +13,17 @@ class GridComponent extends React.Component {
                 <table className="table table-striped table-hover">
                     <thead>
                         <tr>
-                            {this.getColumnData()}
+                            <ColumnComponent
+                                columnConfig={this.props.gridData.headers}
+                                handleSort={this.props.handleSort}
+                            />
                         </tr>
                     </thead>
                     <tbody>
-                        {this.getRowsData()}
+                        <RowComponent
+                            rowConfig={this.props.gridData.rowConfig}
+                            handleCellClick={this.props.handleCellClick}
+                        />
                     </tbody>
                 </table>
             </div>

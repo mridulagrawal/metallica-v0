@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import {
     FETCH_TRADES_SUCCESS,
     SORT_TRADES
@@ -25,14 +26,16 @@ const trades = (state = initialState, action) => {
             }
         case SORT_TRADES:
             const sortBy = action.payload;
-            console.log(state)
+            let newSortedData = Object.assign({}, state.sortedData);
             if (state.sortBy === sortBy && state.sortOrder === ASC) {
                 //sortBy -> sortBy
                 // sortOrder -> DESC
+                newSortedData.rowData = _.orderBy(state.sortedData.rowData, [sortBy], ['desc']);
                 return {
                     ...state,
                     sortBy: sortBy,
-                    sortOrder: DESC
+                    sortOrder: DESC,
+                    sortedData: newSortedData
                 }
             } else if (state.sortBy === sortBy && state.sortOrder === DESC) {
                 // sortBy -> null
@@ -46,10 +49,12 @@ const trades = (state = initialState, action) => {
             } else {
                 //sortBy -> sortBy
                 //sortOrder -> ASC
+                newSortedData.rowData = _.orderBy(state.sortedData.rowData, [sortBy], ['asc']);
                 return {
                     ...state,
                     sortBy: sortBy,
-                    sortOrder: ASC
+                    sortOrder: ASC,
+                    sortedData: newSortedData
                 }
             }
 

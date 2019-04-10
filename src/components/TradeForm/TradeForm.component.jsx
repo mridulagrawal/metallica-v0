@@ -1,10 +1,15 @@
 import React from 'react';
 import './TradeForm.scss'
 
+import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 class TradeFormComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            tradeDate: new Date(),
             price: 5530.05
         };
         this.getTradeDateField = this.getTradeDateField.bind(this);
@@ -12,6 +17,8 @@ class TradeFormComponent extends React.Component {
         this.onFocusUnMaskPriceField = this.onFocusUnMaskPriceField.bind(this);
         this.handlePriceField = this.handlePriceField.bind(this);
         this.formatPrice = this.formatPrice.bind(this);
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +32,11 @@ class TradeFormComponent extends React.Component {
         return <div className="form-group row">
             <label className="col-md-4 control-label">Trade Date</label>
             <div className="col-md-5">
-                <input type="date" className="form-control" id="tradeDate" placeholder="Trade Date" />
+                <DatePicker
+                    selected={this.state.tradeDate}
+                    onChange={this.handleChange}
+                />
+                {/* <input type="date" className="form-control" id="tradeDate" placeholder="Trade Date" /> */}
             </div>
         </div>
     }
@@ -68,11 +79,18 @@ class TradeFormComponent extends React.Component {
         return this.state.price
     }
 
+    handleChange(date) {
+        this.setState({
+            tradeDate: date
+        });
+    }
+
     render() {
         return (
             <>
                 <form className="form-horizontal trade-form">
                     {this.getTradeDateField()}
+
                     {this.getDropdown('Commodity', 'commodity')}
                     <div className="form-group">
                         <label className="col-md-4 control-label">Side</label>
@@ -82,7 +100,7 @@ class TradeFormComponent extends React.Component {
                                     <input type="radio" name="side" id="inlineRadio1" value="BUY" /> Buy
                                         </label>
                                 <label className="radio-inline">
-                                    <input type="radio" name="side" id="inlineRadio2" value="SELL" /> Sell
+                                    <input checked type="radio" name="side" id="inlineRadio2" value="SELL" /> Sell
                                         </label>
                             </div>
                         </div>
@@ -104,17 +122,26 @@ class TradeFormComponent extends React.Component {
                             <label className="control-label">USD</label>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="col-md-4 control-label">CounterParty</label>
-                        <div className="col-md-5">
-                            <select className="form-control">
-                                <option>1</option>
-                            </select>
+                    <div className="form-group row">
+                        <div className="col-md-4">
+                            <label className="control-label">Quantity</label>
+                        </div>
+                        <div className="col-md-5 col-xs-8">
+                            <input
+                                type="text" className="form-control" id="price" placeholder="Quantity (MT)"
+                                value={this.formatPrice()} />
+                        </div>
+                        <div className="col-md-3 col-xs-4">
+                            <label className="control-label">MT</label>
                         </div>
                     </div>
+                    {this.getDropdown('Location', 'location')}
                     <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10">
-                            <button type="submit" className="btn btn-default">Sign in</button>
+                        <div className="col-sm-12">
+                            <span className="pull-right">
+                                <button type="submit" className="btn btn-success">Save</button>
+                                <button type="submit" className="btn btn-danger">Cancel</button>
+                            </span>
                         </div>
                     </div>
                 </form>

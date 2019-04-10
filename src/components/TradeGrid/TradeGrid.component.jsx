@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Grid from '../../containers/Grid/Grid'
 import { TradeGridModel } from './TradeGrid.model';
@@ -44,6 +45,9 @@ class TradeGridComponent extends React.Component {
     }
 
     handleCellClick(trade_id) {
+        this.props.history.push({
+            pathname: `${trade_id}`,
+        });
     }
 
     getPaginationProps() {
@@ -84,4 +88,4 @@ class TradeGridComponent extends React.Component {
     }
 }
 
-export default TradeGridComponent;
+export default withRouter(TradeGridComponent);

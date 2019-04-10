@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { fetchTrades, sortTradesBy } from './actions'
 import TradeGridComponent from '../../components/TradeGrid/TradeGrid.component';
@@ -37,4 +38,4 @@ export const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TradeGrid);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TradeGrid));
